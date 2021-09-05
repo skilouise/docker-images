@@ -35,7 +35,7 @@ RUN set -eu; apk --no-cache --purge add\
     # deps: argon2-libs libedit libxml2 musl pcre2 php7-common zlib, rdeps: drupal7 nextcloud-initscript nextcloud19-initscript
     php7-fpm\
     # deps libssl libcrypto, nordeps
-    #php7-ftp\
+    php7-ftp\
     # deps: freetype libjpeg-turbo libpng libwebp libxpm musl php7-common zlib, rdeps: cacti-php7 drupal7 icingaweb2 nextcloud nextcloud19 phpmyadmin phpmyadmin-doc racktables zabbix-webif zoneminder
     php7-gd\
     # deps: libintl, rdeps: bareos-webui icingaweb2 php7-phalcon phpldapadmin zabbix-webif
@@ -45,7 +45,7 @@ RUN set -eu; apk --no-cache --purge add\
     # nodeps, rdeps: composer drupal7 nextcloud nextcloud19 rainloop-webmail zabbix-webif
     php7-iconv\
     # deps: c-client, nordeps
-    #php7-imap\
+    php7-imap\
     # deps: icu-libs rdeps: icingaweb2 nextcloud nextcloud19
     php7-intl\
     # nodeps, rdeps: baculum-common bareos-webui cacti-php7 composer drupal7 homer-api icingaweb2 nextcloud nextcloud19 php7-pecl-couchbase php7-pecl-mongodb php7-pecl-redis php7-phalcon phpmyadmin phpmyadmin-doc racktables rainloop-webmail zabbix-webif zoneminder 
@@ -161,7 +161,7 @@ RUN set -eu; apk --no-cache --purge add\
     # deps: net-libs-snmp, rdeps: zoneminder?
     php7-snmp\
     # deps: libxml2, nordeps
-    #php7-soap\
+    php7-soap\
     # nodeps, rdeps: cacti-php7 icingaweb2 php7-pecl-event php7-pecl-msgpack zabbix-webif zoneminder
     php7-sockets\
     # nodeps, nordeps
@@ -173,7 +173,7 @@ RUN set -eu; apk --no-cache --purge add\
     # deps: libxml2 php7-dom, rdeps: nextcloud nextcloud19 zabbix-webif
     php7-xmlreader\
     # deps: php7-xml, nordeps
-    #php7-xmlrpc
+    php7-xmlrpc\
     # deps: libxml2, nordeps
     php7-xmlwriter\
     # deps: libxml2 libxslt, nordeps
@@ -183,7 +183,7 @@ RUN set -eu; apk --no-cache --purge add\
     fcgi &&\
     rm -rf /etc/init.d/* /etc/conf.d/* &&\
     # ensure php runs
-    php --version
+    php7 --version
 
 COPY --from=skilouise/stch:latest /bin/stch /bin
 COPY --from=skilouise/stch:latest /bin/stch_dir /bin
