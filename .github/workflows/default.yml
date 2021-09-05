@@ -62,6 +62,6 @@ jobs:
         with:
           build-args: version=${{ steps.tags.outputs.version }}
           context: ./${{ steps.tags.outputs.package }}
-          tags: ${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:${{ steps.tags.outputs.version }},${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:${{ github.sha }}
+          tags: ${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:${{ steps.tags.outputs.version }},${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:${{ github.sha }},${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:latest
           platforms: linux/amd64,linux/arm64
           push: true
