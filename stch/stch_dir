@@ -3,7 +3,7 @@
 template_file() {
     printf "Templating stch file %s..." "$1"
     # Overwriting on failure is intended
-    if stch "$1" > "$2"; then
+    if stch < "$1" > "$2"; then
         echo "done"
     else
         echo "failed! for $1" >&2
