@@ -1,10 +1,12 @@
 FROM alpine:3.13.6
 
-ENV USER_ID="65534"
-ENV GROUP_ID="65534"
 ENV WORKDIR="/var/www"
+# ph -> hex
+ENV USERID="7068"
+ENV GROUPID="8080"
 
 WORKDIR ${WORKDIR}
+
 # Dependencies and reverse dependencies taken from https://pkgs.alpinelinux.org/packages
 RUN set -eu; apk --no-cache --purge add\
     php7\
@@ -185,8 +187,7 @@ RUN set -eu; apk --no-cache --purge add\
     # ensure php runs
     php7 --version
 
-COPY --from=skilouise/stch:latest /bin/stch /bin
-COPY --from=skilouise/stch:latest /bin/stch_dir /bin
+COPY --from=skilouise/init:latest /bin/* /bin/
 COPY root /
 
 STOPSIGNAL SIGQUIT
