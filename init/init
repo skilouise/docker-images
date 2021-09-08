@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+# We cannot change the packages user/group as it may install user/group specific files/directories across the filesystem
+# what we can do is ensure a container user is created with a specific default container user and add the package user
+# to the container group.
+name="_container"
+
+if [ -n "$USERID" ]; then
+    [ -z "$WORKDIR" ] && WORKDIR=/tmp
+    getent passwd $name > /dev/null 2>&1 && deluser $name
+    getent group $name > /dev/null 2>&1 && delgroup $name
+    [ -n "$GROUPID" ] && [ "$USERID" -ne "$GROUPID" ] && addgroup -g $GROUPID $name
+    adduser -D -g 'Container user' ${GROUPID:+-G $name} -h $WORKDIR -H -s /sbin/nologin -u $USERID $name
+fi
+
+[ -n "$GROUPADD" ] && addgroup $GROUPADD $name
+
+stch_dir || exit 1
+exec "$@"
