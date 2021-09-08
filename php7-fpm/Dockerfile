@@ -1,7 +1,6 @@
 FROM alpine:3.14.2
 
 ENV WORKDIR="/var/www"
-# ph -> hex
 ENV USERID="7068"
 ENV GROUPID="8080"
 
@@ -192,7 +191,6 @@ COPY root /
 
 STOPSIGNAL SIGQUIT
 
-# init it defined in skilouise/stch and templates /etc; exec $@
 ENTRYPOINT ["/bin/init"]
 CMD ["php-fpm7"]
 
