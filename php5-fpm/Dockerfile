@@ -1,10 +1,11 @@
 FROM alpine:3.8
 
-ENV USER_ID="65534"
-ENV GROUP_ID="65534"
+ENV USERID="7068"
+ENV GROUPID="8080"
 ENV WORKDIR="/var/www"
 
 WORKDIR ${WORKDIR}
+
 # Dependencies and reverse dependencies taken from https://pkgs.alpinelinux.org/packages
 RUN set -eu; apk --no-cache --purge add\
     php5\
@@ -99,13 +100,11 @@ RUN set -eu; apk --no-cache --purge add\
     # ensure php runs
     php5 --version
 
-COPY --from=skilouise/stch:latest /bin/stch /bin
-COPY --from=skilouise/stch:latest /bin/stch_dir /bin
+COPY --from=skilouise/init:latest /bin/* /bin/
 COPY root /
 
 STOPSIGNAL SIGQUIT
 
-# init it defined in skilouise/stch and templates /etc; exec $@
 ENTRYPOINT ["/bin/init"]
 CMD ["php-fpm5"]
 
