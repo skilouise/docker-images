@@ -6,7 +6,7 @@ ARG date="1970-01-01T00:00:00Z"
 ARG license="PHP-3.0"
 ARG rev="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
 ARG src="localhost"
-ARG title="php5-fpm: Optimized settings and installed with least dependencies and most reverse dependent modules"
+ARG title="php5-fpm: Dynamic templating, optimized defaults, proper healthchecks"
 ARG url="www.php.net"
 
 LABEL org.opencontainers.image.created="$date"\
@@ -115,15 +115,13 @@ RUN set -eu; apk --no-cache --purge add\
     rm -rf /etc/init.d/* /etc/conf.d/* &&\
     # ensure php runs
     php5 --version
-
-COPY --from=skilouise/init:latest /bin/* /bin/
+COPY --from=skilouise/init:0.0.2 /bin/* /bin/
 COPY root /
 
 STOPSIGNAL SIGQUIT
 
 ENTRYPOINT ["/bin/init"]
 CMD ["php-fpm5"]
-
 HEALTHCHECK --interval=5s --timeout=5s\
     CMD SCRIPT_NAME=/ping SCRIPT_FILENAME=/ping REQUEST_METHOD=GET cgi-fcgi -bind -connect localhost:9000/ping | grep -q pong
 
