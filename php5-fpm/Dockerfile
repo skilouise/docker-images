@@ -72,7 +72,7 @@ RUN set -eu; apk --no-cache --purge add\
     # deps: php7-mysqlnd php7-openssl, rdeps: phpmyadmin phpmyadmin-doc racktables
     php5-mysqli\
     # nodeps, nordeps
-    php7-opcache\
+    php5-opcache\
     # deps: libcrypto libssl, rdeps: bareos-webui cacti-php7 composer drupal7 icingaweb2 ltb-project-ssp nextcloud nextcloud-encryption nextcloud19 nextcloud19-encryption php7-mysqli php7-mysqlnd php7-phalcon phpldapadmin phpmyadmin phpmyadmin-doc rainloop-webmail zabbix-webif
     php5-openssl\
     # nodeps, rdeps: drupal7 icingaweb2-module-director nextcloud nextcloud19
