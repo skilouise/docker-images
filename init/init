@@ -16,5 +16,11 @@ fi
 
 [ -n "$GROUPADD" ] && addgroup $GROUPADD $name
 
+
 stch_dir || exit 1
+
+# ensure stdout and stderr are writable as anyone due to some applications not logging to stdout and stderr.
+# we can't chown as we don't know the specific user the application might run as.
+chmod o+w /proc/self/fd/1 /proc/self/fd/2
+
 exec "$@"
