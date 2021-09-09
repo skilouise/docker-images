@@ -25,7 +25,7 @@ RUN set -eu; mkdir -p /var/lib/dnsmasq/tftp &&\
 COPY --from=skilouise/init:latest /bin/* /bin/
 
 ENTRYPOINT ["/bin/init"]
-CMD ["dnsmasq", "-8-", "-k", "-d", "--log-async=100", "--tftp-root=/var/lib/dnsmasq/tftp"]
+CMD ["dnsmasq", "--keep-in-foreground", "--log-async=100", "--log-facility=-", "--tftp-root=/var/lib/dnsmasq/tftp"]
 
 # DNS
 EXPOSE 53/udp
