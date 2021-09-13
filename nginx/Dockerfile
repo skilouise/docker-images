@@ -16,12 +16,14 @@ LABEL org.opencontainers.image.created="$date"\
     org.opencontainers.image.title="$title"\
     org.opencontainers.image.url="$url"
 
+ENV GROUPADD="nginx"
+ENV GROUPID="8080"
+ENV USERID="8008"
 ENV WORKDIR="/var/www"
-ENV GROUP_ID="8080"
 
 WORKDIR ${WORKDIR}
 
-RUN set -eu; apk --update add --no-cache nginx && rm -rf /etc/nginx/* /etc/conf.d/* /etc/init.d/*
+RUN set -eu; apk --update add --no-cache nginx && rm -rf /etc/nginx/* /etc/conf.d/* /etc/init.d/* /var/www/*
 COPY --from=skilouise/init:latest /bin/* /bin/
 COPY root /
 
