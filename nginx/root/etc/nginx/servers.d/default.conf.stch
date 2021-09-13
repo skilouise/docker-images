@@ -1,0 +1,17 @@
+server {
+    # bind: make separate bind call pider addr:port pair.
+    # deferred: defer awakening listener until data arrives.
+    # reuseport: allow a per thread listener socket.
+    # proxy_protocol: allow proxy protocol use
+    listen 8080 default_server bind deferred reuseport;
+    listen [::]:8080 default_server bind deferred reuseport;
+
+    server_name _;
+    root {{! echo ${ROOT:-/var/www} }};
+    index index.html index.htm {{! echo ${PHP_FCGI_URL:+'index.php'} }};
+
+    include locations.d/errors.conf;
+    include locations.d/restrict.conf;
+    {{! echo ${PHP_FCGI_URL:+'include locations.d/php-fpm.conf;'} }}
+    include locations.d/default.conf;
+}

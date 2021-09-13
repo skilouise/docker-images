@@ -1,0 +1,25 @@
+location ~ [^/]\.php(/|$) {
+    try_files $uri =404;
+    fastcgi_index index.php;
+    fastcgi_pass ${PHP_FCGI_URL};
+    fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+    include partials.d/fastcgi_params.conf;
+}
+
+location /status {
+    access_log off;
+    allow 10.0.0.0/8;
+    allow 172.16.0.0/12;
+    allow 192.168.0.0/16;
+    allow fd00::/8;
+    deny all;
+}
+
+location /ping {
+    access_log off;
+    allow 10.0.0.0/8;
+    allow 172.16.0.0/12;
+    allow 192.168.0.0/16;
+    allow fd00::/8;
+    deny all;
+}
