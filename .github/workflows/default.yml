@@ -41,8 +41,15 @@ jobs:
 
       - name: Scan Docker Image
         uses: anchore/scan-action@v3
+        id: scan
         with:
           image: ${{ secrets.REGISTRY_NAMESPACE }}/${{ steps.tags.outputs.package }}:${{ github.sha }}
+          acs-report-enable: true
+
+      - name: Upload SARIF report
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
 
       # Disable until: https://github.com/yuichielectric/dive-action/pull/204
       #      - name: Analyze Docker Image
