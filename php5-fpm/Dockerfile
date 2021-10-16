@@ -69,6 +69,8 @@ RUN set -eu; apk --no-cache --purge add\
     php5-json\
     # deps: libldap, rdeps: cacti-php7 homer-api-ldap icingaweb2 ltb-project-ssp nextcloud-user_ldap nextcloud19-user_ldap phpldapadmin
     php5-ldap\
+    # nodeps, nordeps
+    php5-mysql\
     # deps: php7-mysqlnd php7-openssl, rdeps: phpmyadmin phpmyadmin-doc racktables
     php5-mysqli\
     # nodeps, nordeps
