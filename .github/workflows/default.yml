@@ -55,8 +55,6 @@ jobs:
 
       - name: Scanning failure
         if: ${{ steps.scan.outcome == 'failure' }}
-        with:
-          image: busybox
         run: |
           cat ${{ steps.scan.output.sarif }}
           exit 1
