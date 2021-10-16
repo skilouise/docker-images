@@ -11,16 +11,18 @@ if [ -n "$USERID" ]; then
     getent passwd $name > /dev/null 2>&1 && deluser $name
     getent group $name > /dev/null 2>&1 && delgroup $name
     [ -n "$GROUPID" ] && [ "$USERID" -ne "$GROUPID" ] && addgroup -g $GROUPID $name
+    # adduser will chown -R everyting in the WORKDIR without -H, we don't want this as on dirs with a large amount of files/dirs
+    # will cause massive IO, instead ensure the $WORKDIR itself is chowned afterwards
     adduser -D -g 'Container user' ${GROUPID:+-G $name} -h $WORKDIR -H -s /sbin/nologin -u $USERID $name
+    chown root:$name $WORKDIR
 fi
 
 [ -n "$GROUPADD" ] && addgroup $GROUPADD $name
 
-
 stch_dir || exit 1
 
-# ensure stdout and stderr are writable as anyone due to some applications not logging to stdout and stderr.
-# we can't chown as we don't know the specific user the application might run as.
+# Ensure stdout and stderr are writable as anyone due to some applications not logging to stdout and stderr.
+# We can't chown as we don't know the specific user the application might run as.
 chmod o+w /proc/self/fd/1 /proc/self/fd/2
 
 exec "$@"

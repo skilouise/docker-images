@@ -19,4 +19,5 @@ LABEL org.opencontainers.image.created="$date"\
 COPY --from=skilouise/stch:latest /bin/stch /bin/stch
 COPY --from=skilouise/stch:latest /bin/stch_dir /bin/stch_dir
 COPY init /bin/init
+
 ENTRYPOINT ["/bin/init"]
