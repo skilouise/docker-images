@@ -57,7 +57,9 @@ jobs:
         if: ${{ steps.scan.outcome == 'failure' }}
         with:
           image: busybox
-        run: exit 1
+        run: |
+          cat ${{ steps.scan.output.sarif }}
+          exit 1
 
       # Disable until: https://github.com/yuichielectric/dive-action/pull/204
       #      - name: Analyze Docker Image
