@@ -55,10 +55,8 @@ jobs:
 
       - name: Scanning failure
         if: ${{ steps.scan.outcome == 'failure' }}
-        with:
-          image: busybox
         run: |
-          cat ${{ steps.scan.output.sarif }}
+          cat ${{ steps.scan.outputs.sarif }}
           exit 1
 
       # Disable until: https://github.com/yuichielectric/dive-action/pull/204
