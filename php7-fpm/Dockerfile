@@ -201,7 +201,7 @@ RUN set -eu; apk --no-cache --purge add\
     rm -rf /etc/init.d/* /etc/conf.d/* &&\
     # ensure php runs
     php7 --version
-COPY --from=skilouise/init:0.0.2 /bin/* /bin/
+COPY --from=skilouise/init:0.0.3 /bin/* /bin/
 COPY root /
 
 STOPSIGNAL SIGQUIT
