@@ -1,4 +1,4 @@
-FROM busybox:1.34.1-musl
+FROM busybox:1.35.0-musl
 
 ARG date="1970-01-01T00:00:00Z"
 ARG revision="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
